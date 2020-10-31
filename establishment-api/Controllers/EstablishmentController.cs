@@ -83,5 +83,20 @@ namespace establishment_api.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpDelete]
+        public ActionResult DeleteEstablishment(EstablishmentModel establishment)
+        {
+            try
+            {
+                var sucess = _establishmentService.RemoveEstablishment(establishment);
+
+                return Ok(sucess);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

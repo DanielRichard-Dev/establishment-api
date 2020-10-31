@@ -88,6 +88,15 @@ namespace establishment_service.Establishment
             return true;
         }
 
+        public bool RemoveEstablishment(EstablishmentModel establishment)
+        {
+            DeleteEstablishment(establishment.EstablishmentId);
+            DeleteEstablishmentAddress(establishment.Address.EstablishmentAddressId);
+            DeleteEstablishmentAccount(establishment.Account.EstablishmentAccountId);
+
+            return true;
+        }
+
         public int InsertEstablishment(EstablishmentModel establishment)
         {
             int establishmentId = 0;
@@ -194,6 +203,27 @@ namespace establishment_service.Establishment
         {
             if (establishmentAccount != null)
                 _establishmentAccountRepository.UpdateEstablishmentAccount(establishmentAccount);
+
+            return true;
+        }
+
+        public bool DeleteEstablishment(int establishmentId)
+        {
+            return _establishmentRepository.DeleteEstablishment(establishmentId);
+        }
+
+        public bool DeleteEstablishmentAddress(int establishmentAddressId)
+        {
+            if (establishmentAddressId != 0)
+                _establishmentAddressRepository.DeleteEstablishmentAddress(establishmentAddressId);
+
+            return true;
+        }
+
+        public bool DeleteEstablishmentAccount(int establishmentAccountId)
+        {
+            if (establishmentAccountId != 0)
+                _establishmentAccountRepository.DeleteEstablishmentAccount(establishmentAccountId);
 
             return true;
         }

@@ -65,6 +65,18 @@ namespace establishment_repository.Establishment
             return true;
         }
 
+        public bool DeleteEstablishment(int establishmentId)
+        {
+            #region .: Query :.
+            var query = @"
+                DELETE [dbo].[Establishment]
+                    WHERE [EstablishmentId] = @establishmentId";
+            #endregion
+            ExecuteQuery(query, ConnectionString, new { establishmentId });
+
+            return true;
+        }
+
         public int EstablishmentExist(string cnpj)
         {
             #region .: Query :.

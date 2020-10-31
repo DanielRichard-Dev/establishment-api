@@ -52,5 +52,17 @@ namespace establishment_repository.Establishment
 
             return true;
         }
+
+        public bool DeleteEstablishmentAccount(int establishmentAccountId)
+        {
+            #region .: Query :.
+            var query = @"
+                DELETE [dbo].[EstablishmentAccount]
+                    WHERE [EstablishmentAccountId] = @establishmentAccountId";
+            #endregion
+            ExecuteQuery(query, ConnectionString, new { establishmentAccountId });
+
+            return true;
+        }
     }
 }

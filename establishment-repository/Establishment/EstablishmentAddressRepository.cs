@@ -32,7 +32,7 @@ namespace establishment_repository.Establishment
             #region .: Query :.
             var query = @"
                 SELECT *
-                    FROM [dbo].[EstablishmentAddres]
+                    FROM [dbo].[EstablishmentAddress]
                         WHERE [EstablishmentId] = @establishmentId";
             #endregion
             var establishmentAddress = ExecuteGetObj<EstablishmentAddressModel>(query, ConnectionString, new { establishmentId });

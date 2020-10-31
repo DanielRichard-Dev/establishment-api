@@ -38,5 +38,20 @@ namespace establishment_api.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet]
+        public ActionResult GetEstablishmentByCNPJ(string CNPJ)
+        {
+            try
+            {
+                var establishment = _establishmentService.GetEstablishmentByCNPJ(CNPJ);
+
+                return Ok(new { EstablishmentModel = establishment });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

@@ -41,19 +41,26 @@ namespace establishment_service.Establishment
             return establishment.EstablishmentId;
         }
 
-        public EstablishmentModel GetEstablishment(string cnpj)
+        public EstablishmentModel GetEstablishmentByCNPJ(string cnpj)
         {
             var establishment = SelectEstablishmentByCNPJ(cnpj);
 
-            if (establishment != null)
-            {
-                establishment.Address = SelectEstablishmentAddres(establishment.EstablishmentId);
-                establishment.Account = SelectEstablishmentAccount(establishment.EstablishmentId);
+            return establishment;
+        }
 
-                return establishment;
-            }
+        public EstablishmentModel GetEstablishmentByCategory(string category)
+        {
+            var establishment = SelectEstablishmentByCategory(category);
 
-            throw new Exception("Estabelecimento não encontrado!");
+            return establishment;
+        }
+
+        public EstablishmentModel GetEstablishmentAddressAndAccount(EstablishmentModel establishment)
+        {
+            establishment.Address = SelectEstablishmentAddres(establishment.EstablishmentId);
+            establishment.Account = SelectEstablishmentAccount(establishment.EstablishmentId);
+
+            return establishment;
         }
 
         public int InsertEstablishment(EstablishmentModel establishment)
@@ -99,9 +106,26 @@ namespace establishment_service.Establishment
             return establishmentAccountId;
         }
 
+        public EstablishmentModel SelectEstablishmentByCategory(string category)
+        {
+            var establishment = _establishmentRepository.SelectEstablishmentByCategory(category);
+
+            if (establishment != null)
+                establishment = GetEstablishmentAddressAndAccount(establishment);
+            else
+                throw new Exception("Estabelecimento não encontrado!");
+
+            return establishment;
+        }
+
         public EstablishmentModel SelectEstablishmentByCNPJ(string cnpj)
         {
             var establishment = _establishmentRepository.SelectEstablishmentByCNPJ(cnpj);
+
+            if (establishment != null)
+                establishment = GetEstablishmentAddressAndAccount(establishment);
+            else
+                throw new Exception("Estabelecimento não encontrado!");
 
             return establishment;
         }

@@ -49,5 +49,18 @@ namespace establishment_repository.Establishment
 
             return establishment;
         }
+
+        public EstablishmentModel SelectEstablishmentByCategory(string category)
+        {
+            #region .: Query :.
+            var query = @"
+                SELECT *
+                    FROM [dbo].[Establishment]
+                        WHERE [Category] = @category";
+            #endregion
+            var establishment = ExecuteGetObj<EstablishmentModel>(query, ConnectionString, new { category });
+
+            return establishment;
+        }
     }
 }

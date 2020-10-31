@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using establishment_models.Establishment;
 using establishment_service.Establishment;
+using establishment_service.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -14,14 +15,11 @@ namespace establishment_api.Controllers
     [ApiController]
     public class EstablishmentController : ControllerBase
     {
-        public EstablishmentService _establishmentService { get; set; }
+        public IEstablishmentService _establishmentService { get; set; }
 
-        public IConfiguration _configuration { get; set; }
-
-        public EstablishmentController(IConfiguration _configuration)
+        public EstablishmentController(IEstablishmentService _establishmentService)
         {
-            this._configuration = _configuration;
-            _establishmentService = new EstablishmentService(_configuration);
+            this._establishmentService = _establishmentService;
         }
 
         [HttpPost]

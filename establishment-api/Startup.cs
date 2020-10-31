@@ -2,6 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using establishment_repository.Establishment;
+using establishment_repository.Interface;
+using establishment_service.Establishment;
+using establishment_service.Interface;
+using establishment_service.Validate;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +32,12 @@ namespace establishment_api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddTransient<IEstablishmentRepository, EstablishmentRepository>();
+            services.AddTransient<IEstablishmentAddressRepository, EstablishmentAddressRepository>();
+            services.AddTransient<IEstablishmentAccountRepository, EstablishmentAccountRepository>();
+            services.AddTransient<IEstablishmentService, EstablishmentService>();
+            services.AddTransient<IValidateService, ValidateService>();
 
             services.AddSwaggerGen(c =>
             {

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using establishment_service.Interface;
+using System;
 using System.Text.RegularExpressions;
 
 namespace establishment_service.Validate
 {
-    public class ValidateService
+    public class ValidateService : IValidateService
     {
         public bool ValidCNPJ(string cnpj)
         {
@@ -18,8 +17,7 @@ namespace establishment_service.Validate
             cnpj = cnpj.Replace(".", "").Replace("-", "").Replace("/", "");
 
             if (cnpj.Length != 14)
-
-                return false;
+                throw new Exception("CNPJ inválido!");
 
             tempCnpj = cnpj.Substring(0, 12);
             sum = 0;
@@ -28,7 +26,6 @@ namespace establishment_service.Validate
             {
                 sum += int.Parse(tempCnpj[i].ToString()) * multiplier1[i];
             }
-
 
             rest = (sum % 11);
 

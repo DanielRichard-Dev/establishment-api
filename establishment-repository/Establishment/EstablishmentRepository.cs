@@ -1,11 +1,12 @@
 ﻿using establishment_models.Establishment;
+using establishment_repository.Interface;
 using establishment_repository.Master;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 
 namespace establishment_repository.Establishment
 {
-    public class EstablishmentRepository : MasterRepository
+    public class EstablishmentRepository : MasterRepository, IEstablishmentRepository
     {
         public EstablishmentRepository(IConfiguration configuration) : base(configuration)
         {

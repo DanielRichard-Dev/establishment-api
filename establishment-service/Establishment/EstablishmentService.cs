@@ -1,5 +1,7 @@
 ﻿using establishment_models.Establishment;
 using establishment_repository.Establishment;
+using establishment_repository.Interface;
+using establishment_service.Interface;
 using establishment_service.Validate;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -7,23 +9,20 @@ using System.Collections.Generic;
 
 namespace establishment_service.Establishment
 {
-    public class EstablishmentService
+    public class EstablishmentService : IEstablishmentService
     {
-        public EstablishmentRepository _establishmentRepository { get; set; }
-        public EstablishmentAddressRepository _establishmentAddressRepository { get; set; }
-        public EstablishmentAccountRepository _establishmentAccountRepository { get; set; }
-        public ValidateService _validateService { get; set; }
+        public IEstablishmentRepository _establishmentRepository { get; set; }
+        public IEstablishmentAddressRepository _establishmentAddressRepository { get; set; }
+        public IEstablishmentAccountRepository _establishmentAccountRepository { get; set; }
+        public IValidateService _validateService { get; set; }
 
-        public IConfiguration _configuration { get; set; }
-
-        public EstablishmentService(IConfiguration _configuration)
+        public EstablishmentService(IEstablishmentRepository _establishmentRepository, IEstablishmentAddressRepository _establishmentAddressRepository,
+            IEstablishmentAccountRepository _establishmentAccountRepository, IValidateService _validateService)
         {
-            this._configuration = _configuration;
-
-            _establishmentRepository = new EstablishmentRepository(_configuration);
-            _establishmentAddressRepository = new EstablishmentAddressRepository(_configuration);
-            _establishmentAccountRepository = new EstablishmentAccountRepository(_configuration);
-            _validateService = new ValidateService();
+            this._establishmentRepository = _establishmentRepository;
+            this._establishmentAddressRepository = _establishmentAddressRepository;
+            this._establishmentAccountRepository = _establishmentAccountRepository;
+            this._validateService = _validateService;
         }
 
         public int CreateEstablishment(EstablishmentModel establishment)

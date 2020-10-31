@@ -1,4 +1,5 @@
 ﻿using establishment_models.Establishment;
+using establishment_repository.Interface;
 using establishment_repository.Master;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace establishment_repository.Establishment
 {
-    public class EstablishmentAccountRepository : MasterRepository
+    public class EstablishmentAccountRepository : MasterRepository, IEstablishmentAccountRepository
     {
         public EstablishmentAccountRepository(IConfiguration configuration) : base(configuration)
         {

@@ -1,9 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>establishment_service</RootNamespace>
+    <ApplicationIcon />
+    <StartupObject />
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\establishment-models\establishment-models.csproj" />
+    <ProjectReference Include="..\establishment-repository\establishment-repository.csproj" />
+  </ItemGroup>
 
 </Project>

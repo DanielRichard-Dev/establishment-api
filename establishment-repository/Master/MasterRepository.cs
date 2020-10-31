@@ -12,9 +12,18 @@ namespace establishment_repository.Master
     {
         private readonly IConfiguration _configuration;
 
+        public string ConnectionString { get; set; }
+
         public MasterRepository(IConfiguration configuration)
         {
             _configuration = configuration;
+
+            ConnectionString = GetConnectionFitcard();
+        }
+
+        public string GetConnectionFitcard()
+        {
+            return _configuration.GetConnectionString("Fitcard");
         }
 
         protected T ExecuteGetObj<T>(string query, string connectionString, object obj = null)

@@ -5,7 +5,7 @@ namespace establishment_models.Establishment
 {
     public class EstablishmentModel
     {
-        public string EstablishmentId { get; set; }
+        public int EstablishmentId { get; set; }
 
         public string CompanyName { get; set; }
 
@@ -21,7 +21,7 @@ namespace establishment_models.Establishment
 
         public bool Status { get; set; }
 
-        public EstablishmentAddressModel Adress { get; set; }
+        public EstablishmentAddressModel Address { get; set; }
 
         public EstablishmentCategoryEnum Category { get; set; }
 

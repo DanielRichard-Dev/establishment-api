@@ -36,7 +36,9 @@ namespace establishment_api
             services.AddTransient<IEstablishmentRepository, EstablishmentRepository>();
             services.AddTransient<IEstablishmentAddressRepository, EstablishmentAddressRepository>();
             services.AddTransient<IEstablishmentAccountRepository, EstablishmentAccountRepository>();
+            services.AddTransient<IEstablishmentCategoryRepository, EstablishmentCategoryRepository>();
             services.AddTransient<IEstablishmentService, EstablishmentService>();
+            services.AddTransient<IEstablishmentCategoryService, EstablishmentCategoryService>();
             services.AddTransient<IValidateService, ValidateService>();
 
             services.AddSwaggerGen(c =>

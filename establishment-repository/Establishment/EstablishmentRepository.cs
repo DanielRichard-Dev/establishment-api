@@ -1,6 +1,7 @@
 ﻿using establishment_models.Establishment;
 using establishment_repository.Master;
 using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 
 namespace establishment_repository.Establishment
 {
@@ -8,19 +9,6 @@ namespace establishment_repository.Establishment
     {
         public EstablishmentRepository(IConfiguration configuration) : base(configuration)
         {
-        }
-
-        public int EstablishmentExist(string cnpj)
-        {
-            #region .: Query :.
-            var query = @"
-                SELECT [EstablishmentId]
-                    FROM [dbo].[Establishment]
-                        WHERE [CNPJ] = @cnpj";
-            #endregion
-            var establishmentId = ExecuteGetObj<int>(query, ConnectionString, new { cnpj });
-
-            return establishmentId;
         }
 
         public int InsertEstablishment(EstablishmentModel request)
@@ -50,7 +38,7 @@ namespace establishment_repository.Establishment
             return establishment;
         }
 
-        public EstablishmentModel SelectEstablishmentByCategory(string category)
+        public List<EstablishmentModel> SelectEstablishmentByCategory(int category)
         {
             #region .: Query :.
             var query = @"
@@ -58,9 +46,36 @@ namespace establishment_repository.Establishment
                     FROM [dbo].[Establishment]
                         WHERE [Category] = @category";
             #endregion
-            var establishment = ExecuteGetObj<EstablishmentModel>(query, ConnectionString, new { category });
+            var establishment = ExecuteGetList<EstablishmentModel>(query, ConnectionString, new { category });
 
             return establishment;
+        }
+
+        public bool UpdateEstablishment(EstablishmentModel request)
+        {
+            #region .: Query :.
+            var query = @"
+                UPDATE [dbo].[Establishment]
+                    SET [CompanyName] = @CompanyName, [FantasyName] = @FantasyName, [CNPJ] = @CNPJ, [Email] = @Email,
+                            [Telephone] = @Telephone, [DateOfRegistration] = @DateOfRegistration, [Status] = @Status, [Category] = @Category
+                                WHERE [EstablishmentId] = @EstablishmentId";
+            #endregion
+            ExecuteQuery(query, ConnectionString, request);
+
+            return true;
+        }
+
+        public int EstablishmentExist(string cnpj)
+        {
+            #region .: Query :.
+            var query = @"
+                SELECT [EstablishmentId]
+                    FROM [dbo].[Establishment]
+                        WHERE [CNPJ] = @cnpj";
+            #endregion
+            var establishmentId = ExecuteGetObj<int>(query, ConnectionString, new { cnpj });
+
+            return establishmentId;
         }
     }
 }

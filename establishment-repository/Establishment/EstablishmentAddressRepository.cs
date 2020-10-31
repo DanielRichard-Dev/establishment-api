@@ -39,5 +39,18 @@ namespace establishment_repository.Establishment
 
             return establishmentAddress;
         }
+
+        public bool UpdateEstablishmentAddress(EstablishmentAddressModel request)
+        {
+            #region .: Query :.
+            var query = @"
+                UPDATE [dbo].[EstablishmentAddress]
+                    SET [Address] = @Address, [City] = @City, [State] = @State
+                        WHERE [EstablishmentAddressId] = @EstablishmentAddressId";
+            #endregion
+            ExecuteQuery(query, ConnectionString, request);
+
+            return true;
+        }
     }
 }

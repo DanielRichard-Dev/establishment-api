@@ -46,6 +46,26 @@ namespace establishment_repository.Master
             }
         }
 
+        protected List<T> ExecuteGetList<T>(string query, string connectionString, object obj = null)
+        {
+            try
+            {
+                using (var conn = new SqlConnection(connectionString))
+                {
+                    var _objReturn = new List<T>();
+                    if (obj != null)
+                        _objReturn = conn.Query<T>(query, obj).ToList();
+                    else
+                        _objReturn = conn.Query<T>(query).ToList();
+                    return _objReturn;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         protected void ExecuteQuery(string query, string connectionString, object obj = null)
         {
             try

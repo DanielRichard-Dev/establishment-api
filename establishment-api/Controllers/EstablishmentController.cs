@@ -53,5 +53,35 @@ namespace establishment_api.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("GetEstablishmentByCategory")]
+        public ActionResult GetEstablishmentByCategory(int category)
+        {
+            try
+            {
+                var _establishment = _establishmentService.GetEstablishmentByCategory(category);
+
+                return Ok(new { EstablishmentModel = _establishment });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        public ActionResult UpdateEstablishment(EstablishmentModel establishment)
+        {
+            try
+            {
+                var sucess = _establishmentService.SaveEstablishment(establishment);
+
+                return Ok(sucess);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

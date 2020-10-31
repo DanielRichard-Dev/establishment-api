@@ -39,5 +39,18 @@ namespace establishment_repository.Establishment
 
             return establishmentAccount;
         }
+
+        public bool UpdateEstablishmentAccount(EstablishmentAccountModel request)
+        {
+            #region .: Query :.
+            var query = @"
+                UPDATE [dbo].[EstablishmentAccount]
+                    SET [Agency] = @Agency, [Account] = @Account
+                        WHERE [EstablishmentAccountId] = @EstablishmentAccountId";
+            #endregion
+            ExecuteQuery(query, ConnectionString, request);
+
+            return true;
+        }
     }
 }

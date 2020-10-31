@@ -3,6 +3,7 @@ using establishment_repository.Establishment;
 using establishment_service.Validate;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 
 namespace establishment_service.Establishment
 {
@@ -32,7 +33,7 @@ namespace establishment_service.Establishment
             if (establishment.EstablishmentId == 0)
             {
                 establishment.EstablishmentId = InsertEstablishment(establishment);
-                establishment.Address.EstablishmentAdressId = InsertEstablishmentAddress(establishment.Address, establishment.EstablishmentId);
+                establishment.Address.EstablishmentAddressId = InsertEstablishmentAddress(establishment.Address, establishment.EstablishmentId);
                 establishment.Account.EstablishmentAccountId = InsertEstablishmentAccount(establishment.Account, establishment.EstablishmentId);
             }
             else
@@ -48,7 +49,7 @@ namespace establishment_service.Establishment
             return establishment;
         }
 
-        public EstablishmentModel GetEstablishmentByCategory(string category)
+        public List<EstablishmentModel> GetEstablishmentByCategory(int category)
         {
             var establishment = SelectEstablishmentByCategory(category);
 
@@ -63,6 +64,30 @@ namespace establishment_service.Establishment
             return establishment;
         }
 
+        public List<EstablishmentModel> GetEstablishmentAddressAndAccountList(List<EstablishmentModel> _establishment)
+        {
+            var _newEstabilishment = new List<EstablishmentModel>();
+
+            foreach (var establishment in _establishment)
+            {
+                establishment.Address = SelectEstablishmentAddres(establishment.EstablishmentId);
+                establishment.Account = SelectEstablishmentAccount(establishment.EstablishmentId);
+
+                _newEstabilishment.Add(establishment);
+            }
+
+            return _newEstabilishment;
+        }
+
+        public bool SaveEstablishment(EstablishmentModel establishment)
+        {
+            UpdateEstablishment(establishment);
+            UpdateEstablishmentAddress(establishment.Address);
+            UpdateEstablishAccount(establishment.Account);
+
+            return true;
+        }
+
         public int InsertEstablishment(EstablishmentModel establishment)
         {
             int establishmentId = 0;
@@ -71,6 +96,8 @@ namespace establishment_service.Establishment
             {
                 _validateService.ValidCNPJ(establishment.CNPJ);
                 _validateService.ValidEmail(establishment.Email);
+
+                establishment.DateOfRegistration = DateTime.Now;
 
                 establishmentId = _establishmentRepository.InsertEstablishment(establishment);
             }
@@ -106,16 +133,16 @@ namespace establishment_service.Establishment
             return establishmentAccountId;
         }
 
-        public EstablishmentModel SelectEstablishmentByCategory(string category)
+        public List<EstablishmentModel> SelectEstablishmentByCategory(int category)
         {
-            var establishment = _establishmentRepository.SelectEstablishmentByCategory(category);
+            var _establishment = _establishmentRepository.SelectEstablishmentByCategory(category);
 
-            if (establishment != null)
-                establishment = GetEstablishmentAddressAndAccount(establishment);
+            if (_establishment.Count > 0)
+                _establishment = GetEstablishmentAddressAndAccountList(_establishment);
             else
-                throw new Exception("Estabelecimento não encontrado!");
+                throw new Exception("Não possui estabelecimentos nessa categoria!");
 
-            return establishment;
+            return _establishment;
         }
 
         public EstablishmentModel SelectEstablishmentByCNPJ(string cnpj)
@@ -148,6 +175,27 @@ namespace establishment_service.Establishment
                 establishmentAccount = new EstablishmentAccountModel();
 
             return establishmentAccount;
+        }
+
+        public bool UpdateEstablishment(EstablishmentModel establishment)
+        {
+            return _establishmentRepository.UpdateEstablishment(establishment);
+        }
+
+        public bool UpdateEstablishmentAddress(EstablishmentAddressModel establishmentAddress)
+        {
+            if (establishmentAddress != null)
+                _establishmentAddressRepository.UpdateEstablishmentAddress(establishmentAddress);
+
+            return true;
+        }
+
+        public bool UpdateEstablishAccount(EstablishmentAccountModel establishmentAccount)
+        {
+            if (establishmentAccount != null)
+                _establishmentAccountRepository.UpdateEstablishmentAccount(establishmentAccount);
+
+            return true;
         }
 
         public int CheckEstablishment(string cnpj)

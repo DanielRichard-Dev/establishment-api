@@ -2,7 +2,7 @@
 {
     public class EstablishmentAddressModel
     {
-        public int EstablishmentAdressId { get; set; }
+        public int EstablishmentAddressId { get; set; }
 
         public int EstablishmentId { get; set; }
 

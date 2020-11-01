@@ -17,8 +17,8 @@ namespace establishment_repository.Establishment
             #region .: Query :.
             var query = @"
                 INSERT INTO [dbo].[Establishment]
-                    ([CompanyName], [FantasyName], [CNPJ], [Email], [Telephone], [DateOfRegistration], [Status], [Category])
-                        VALUES (@CompanyName, @FantasyName, @CNPJ, @Email, @Telephone, @DateOfRegistration, @Status, @Category)
+                    ([CompanyName], [FantasyName], [CNPJ], [Email], [Telephone], [DateOfRegistration], [Status], [CategoryId])
+                        VALUES (@CompanyName, @FantasyName, @CNPJ, @Email, @Telephone, @DateOfRegistration, @Status, @CategoryId)
                 SELECT CAST(SCOPE_IDENTITY() AS INT) [EstablishmentId]";
             #endregion
             var establishmentId = ExecuteGetObj<int>(query, ConnectionString, request);
@@ -39,15 +39,15 @@ namespace establishment_repository.Establishment
             return establishment;
         }
 
-        public List<EstablishmentModel> SelectEstablishmentByCategory(int category)
+        public List<EstablishmentModel> SelectEstablishmentByCategory(int categoryId)
         {
             #region .: Query :.
             var query = @"
                 SELECT *
                     FROM [dbo].[Establishment]
-                        WHERE [Category] = @category";
+                        WHERE [Category] = @categoryId";
             #endregion
-            var establishment = ExecuteGetList<EstablishmentModel>(query, ConnectionString, new { category });
+            var establishment = ExecuteGetList<EstablishmentModel>(query, ConnectionString, new { categoryId });
 
             return establishment;
         }
@@ -58,7 +58,7 @@ namespace establishment_repository.Establishment
             var query = @"
                 UPDATE [dbo].[Establishment]
                     SET [CompanyName] = @CompanyName, [FantasyName] = @FantasyName, [CNPJ] = @CNPJ, [Email] = @Email,
-                            [Telephone] = @Telephone, [DateOfRegistration] = @DateOfRegistration, [Status] = @Status, [Category] = @Category
+                            [Telephone] = @Telephone, [DateOfRegistration] = @DateOfRegistration, [Status] = @Status, [CategoryId] = @CategoryId
                                 WHERE [EstablishmentId] = @EstablishmentId";
             #endregion
             ExecuteQuery(query, ConnectionString, request);

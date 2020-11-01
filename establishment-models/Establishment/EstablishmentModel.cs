@@ -23,7 +23,7 @@ namespace establishment_models.Establishment
 
         public EstablishmentAddressModel Address { get; set; }
 
-        public EstablishmentCategoryEnum Category { get; set; }
+        public int CategoryId { get; set; }
 
         public EstablishmentAccountModel Account { get; set; }
     }

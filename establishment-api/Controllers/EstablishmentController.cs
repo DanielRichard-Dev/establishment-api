@@ -53,11 +53,11 @@ namespace establishment_api.Controllers
         }
 
         [HttpGet("GetEstablishmentByCategory")]
-        public ActionResult GetEstablishmentByCategory(int category)
+        public ActionResult GetEstablishmentByCategory(int categoryId)
         {
             try
             {
-                var _establishment = _establishmentService.GetEstablishmentByCategory(category);
+                var _establishment = _establishmentService.GetEstablishmentByCategory(categoryId);
 
                 return Ok(new { EstablishmentModel = _establishment });
             }

@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "establishment-api", "establishment-api\establishment-api.csproj", "{B593FF97-535D-4256-B660-75173DEB9D44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "establishment-models", "establishment-models\establishment-models.csproj", "{0875441F-F3C2-4726-8E22-5DCBEA9E1ABC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "establishment-models", "establishment-models\establishment-models.csproj", "{0875441F-F3C2-4726-8E22-5DCBEA9E1ABC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "establishment-repository", "establishment-repository\establishment-repository.csproj", "{AF931306-0F38-43E3-B77E-8E8621C29DF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "establishment-repository", "establishment-repository\establishment-repository.csproj", "{AF931306-0F38-43E3-B77E-8E8621C29DF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "establishment-service", "establishment-service\establishment-service.csproj", "{9370D1AC-1192-4515-BDAD-D9087C45B1CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "establishment-service", "establishment-service\establishment-service.csproj", "{9370D1AC-1192-4515-BDAD-D9087C45B1CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "establishment-test", "establishment-test\establishment-test.csproj", "{91537380-DF8D-4D6F-B3ED-B6671673A8D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{9370D1AC-1192-4515-BDAD-D9087C45B1CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9370D1AC-1192-4515-BDAD-D9087C45B1CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9370D1AC-1192-4515-BDAD-D9087C45B1CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91537380-DF8D-4D6F-B3ED-B6671673A8D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91537380-DF8D-4D6F-B3ED-B6671673A8D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91537380-DF8D-4D6F-B3ED-B6671673A8D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91537380-DF8D-4D6F-B3ED-B6671673A8D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

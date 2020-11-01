@@ -36,7 +36,7 @@ namespace establishment_service.Establishment
                 establishment.Account.EstablishmentAccountId = InsertEstablishmentAccount(establishment.Account, establishment.EstablishmentId);
             }
             else
-                throw new Exception("Estabelecimento já cadastrado!");
+                throw new ArgumentException("Estabelecimento já cadastrado!");
 
             return establishment.EstablishmentId;
         }
@@ -141,9 +141,9 @@ namespace establishment_service.Establishment
             return establishmentAccountId;
         }
 
-        public List<EstablishmentModel> SelectEstablishmentByCategory(int category)
+        public List<EstablishmentModel> SelectEstablishmentByCategory(int categoryId)
         {
-            var _establishment = _establishmentRepository.SelectEstablishmentByCategory(category);
+            var _establishment = _establishmentRepository.SelectEstablishmentByCategory(categoryId);
 
             if (_establishment.Count > 0)
                 _establishment = GetEstablishmentAddressAndAccountList(_establishment);

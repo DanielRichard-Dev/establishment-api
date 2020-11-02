@@ -71,7 +71,7 @@ namespace establishment_repository.Establishment
             var query = @"
                 UPDATE [dbo].[Establishment]
                     SET [CompanyName] = @CompanyName, [FantasyName] = @FantasyName, [CNPJ] = @CNPJ, [Email] = @Email,
-                            [Telephone] = @Telephone, [DateOfRegistration] = @DateOfRegistration, [Status] = @Status, [CategoryId] = @CategoryId
+                            [Telephone] = @Telephone, [Status] = @Status, [CategoryId] = @CategoryId
                                 WHERE [EstablishmentId] = @EstablishmentId";
             #endregion
             ExecuteQuery(query, ConnectionString, request);

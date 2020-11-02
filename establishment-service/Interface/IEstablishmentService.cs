@@ -41,9 +41,9 @@ namespace establishment_service.Interface
 
         bool UpdateEstablishment(EstablishmentModel establishment);
 
-        bool UpdateEstablishmentAddress(EstablishmentAddressModel establishmentAddress);
+        bool UpdateEstablishmentAddress(EstablishmentAddressModel establishmentAddress, int establishmentId);
 
-        bool UpdateEstablishAccount(EstablishmentAccountModel establishmentAccount);
+        bool UpdateEstablishAccount(EstablishmentAccountModel establishmentAccount, int establishmentId);
 
         bool DeleteEstablishment(int establishmentId);
 

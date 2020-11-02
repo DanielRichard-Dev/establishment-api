@@ -90,8 +90,8 @@ namespace establishment_service.Establishment
         public bool SaveEstablishment(EstablishmentModel establishment)
         {
             UpdateEstablishment(establishment);
-            UpdateEstablishmentAddress(establishment.Address);
-            UpdateEstablishAccount(establishment.Account);
+            UpdateEstablishmentAddress(establishment.Address, establishment.EstablishmentId);
+            UpdateEstablishAccount(establishment.Account, establishment.EstablishmentId);
 
             return true;
         }
@@ -211,17 +211,21 @@ namespace establishment_service.Establishment
             return _establishmentRepository.UpdateEstablishment(establishment);
         }
 
-        public bool UpdateEstablishmentAddress(EstablishmentAddressModel establishmentAddress)
+        public bool UpdateEstablishmentAddress(EstablishmentAddressModel establishmentAddress, int establishmentId)
         {
-            if (establishmentAddress != null)
+            establishmentAddress.EstablishmentId = establishmentId;
+
+            if (establishmentAddress != null && establishmentAddress.EstablishmentId != 0)
                 _establishmentAddressRepository.UpdateEstablishmentAddress(establishmentAddress);
 
             return true;
         }
 
-        public bool UpdateEstablishAccount(EstablishmentAccountModel establishmentAccount)
+        public bool UpdateEstablishAccount(EstablishmentAccountModel establishmentAccount, int establishmentId)
         {
-            if (establishmentAccount != null)
+            establishmentAccount.EstablishmentId = establishmentId;
+
+            if (establishmentAccount != null && establishmentAccount.EstablishmentId != 0)
                 _establishmentAccountRepository.UpdateEstablishmentAccount(establishmentAccount);
 
             return true;

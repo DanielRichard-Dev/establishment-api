@@ -47,7 +47,7 @@ namespace establishment_repository.Establishment
             var query = @"
                 UPDATE [dbo].[EstablishmentAccount]
                     SET [Agency] = @Agency, [Account] = @Account
-                        WHERE [EstablishmentAccountId] = @EstablishmentAccountId";
+                        WHERE [EstablishmentId] = @EstablishmentId";
             #endregion
             ExecuteQuery(query, ConnectionString, request);
 

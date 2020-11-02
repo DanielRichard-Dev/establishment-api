@@ -13,6 +13,8 @@ namespace establishment_service.Interface
 
         List<EstablishmentModel> GetEstablishmentByCategory(int category);
 
+        List<EstablishmentModel> GetEstablishmentByCompanyName(string companyName);
+
         EstablishmentModel GetEstablishmentAddressAndAccount(EstablishmentModel establishment);
 
         List<EstablishmentModel> GetEstablishmentAddressAndAccountList(List<EstablishmentModel> _establishment);
@@ -27,9 +29,11 @@ namespace establishment_service.Interface
 
         int InsertEstablishmentAccount(EstablishmentAccountModel establishmentAccount, int establishmentId);
 
-        List<EstablishmentModel> SelectEstablishmentByCategory(int category);
+        List<EstablishmentModel> SelectEstablishmentByCategory(int categoryId);
 
         EstablishmentModel SelectEstablishmentByCNPJ(string cnpj);
+
+        List<EstablishmentModel> SelectEstablishmentByCompanyName(string companyName);
 
         EstablishmentAddressModel SelectEstablishmentAddres(int establishmentId);
 

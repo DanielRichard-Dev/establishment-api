@@ -47,9 +47,22 @@ namespace establishment_repository.Establishment
                     FROM [dbo].[Establishment]
                         WHERE [Category] = @categoryId";
             #endregion
-            var establishment = ExecuteGetList<EstablishmentModel>(query, ConnectionString, new { categoryId });
+            var _establishment = ExecuteGetList<EstablishmentModel>(query, ConnectionString, new { categoryId });
 
-            return establishment;
+            return _establishment;
+        }
+
+        public List<EstablishmentModel> SelectEstablishmentByCompanyName(string companyName)
+        {
+            #region .: Query :.
+            var query = $@"
+                SELECT *
+                    FROM [dbo].[Establishment]
+                        WHERE [CompanyName] LIKE ('%{companyName}%')";
+            #endregion
+            var _establishment = ExecuteGetList<EstablishmentModel>(query, ConnectionString, new { companyName });
+
+            return _establishment;
         }
 
         public bool UpdateEstablishment(EstablishmentModel request)

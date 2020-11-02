@@ -29,12 +29,14 @@ namespace establishment_service.Establishment
         {
             establishment.EstablishmentId = CheckEstablishment(establishment.CNPJ);
 
-            if (establishment.EstablishmentId == 0)
+            if (establishment.EstablishmentId == 0 && establishment.CompanyName != null && establishment.CNPJ != null)
             {
                 establishment.EstablishmentId = InsertEstablishment(establishment);
                 establishment.Address.EstablishmentAddressId = InsertEstablishmentAddress(establishment.Address, establishment.EstablishmentId);
                 establishment.Account.EstablishmentAccountId = InsertEstablishmentAccount(establishment.Account, establishment.EstablishmentId);
             }
+            else if (establishment.EstablishmentId == 0 && establishment.CompanyName == null && establishment.CNPJ == null)
+                throw new ArgumentException("Nome da empresa ou CNPJ vazio!");
             else
                 throw new ArgumentException("Estabelecimento já cadastrado!");
 
@@ -48,11 +50,18 @@ namespace establishment_service.Establishment
             return establishment;
         }
 
-        public List<EstablishmentModel> GetEstablishmentByCategory(int category)
+        public List<EstablishmentModel> GetEstablishmentByCategory(int categoryId)
         {
-            var establishment = SelectEstablishmentByCategory(category);
+            var _establishment = SelectEstablishmentByCategory(categoryId);
 
-            return establishment;
+            return _establishment;
+        }
+
+        public List<EstablishmentModel> GetEstablishmentByCompanyName(string companyName)
+        {
+            var _establishment = SelectEstablishmentByCompanyName(companyName);
+
+            return _establishment;
         }
 
         public EstablishmentModel GetEstablishmentAddressAndAccount(EstablishmentModel establishment)
@@ -163,6 +172,18 @@ namespace establishment_service.Establishment
                 throw new Exception("Estabelecimento não encontrado!");
 
             return establishment;
+        }
+
+        public List<EstablishmentModel> SelectEstablishmentByCompanyName(string companyName)
+        {
+            var _establishment = _establishmentRepository.SelectEstablishmentByCompanyName(companyName);
+
+            if (_establishment.Count > 0)
+                _establishment = GetEstablishmentAddressAndAccountList(_establishment);
+            else
+                throw new Exception("Não possui estabelecimentos com esse nome!");
+
+            return _establishment;
         }
 
         public EstablishmentAddressModel SelectEstablishmentAddres(int establishmentId)

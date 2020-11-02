@@ -9,7 +9,9 @@ namespace establishment_repository.Interface
 
         EstablishmentModel SelectEstablishmentByCNPJ(string cnpj);
 
-        List<EstablishmentModel> SelectEstablishmentByCategory(int category);
+        List<EstablishmentModel> SelectEstablishmentByCategory(int categoryId);
+
+        List<EstablishmentModel> SelectEstablishmentByCompanyName(string companyName);
 
         bool UpdateEstablishment(EstablishmentModel request);
 

@@ -98,11 +98,11 @@ namespace establishment_api.Controllers
         }
 
         [HttpDelete]
-        public ActionResult DeleteEstablishment(EstablishmentModel establishment)
+        public ActionResult DeleteEstablishment(int establishmentId)
         {
             try
             {
-                var sucess = _establishmentService.RemoveEstablishment(establishment);
+                var sucess = _establishmentService.RemoveEstablishment(establishmentId);
 
                 return Ok(sucess);
             }

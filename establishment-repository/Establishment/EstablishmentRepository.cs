@@ -45,7 +45,7 @@ namespace establishment_repository.Establishment
             var query = @"
                 SELECT *
                     FROM [dbo].[Establishment]
-                        WHERE [Category] = @categoryId";
+                        WHERE [CategoryId] = @categoryId";
             #endregion
             var _establishment = ExecuteGetList<EstablishmentModel>(query, ConnectionString, new { categoryId });
 

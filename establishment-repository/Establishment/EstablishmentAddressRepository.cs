@@ -54,14 +54,14 @@ namespace establishment_repository.Establishment
             return true;
         }
 
-        public bool DeleteEstablishmentAddress(int establishmentAddressId)
+        public bool DeleteEstablishmentAddress(int establishmentId)
         {
             #region .: Query :.
             var query = @"
                 DELETE [dbo].[EstablishmentAddress]
-                    WHERE [EstablishmentAddressId] = @establishmentAddressId";
+                    WHERE [EstablishmentId] = @establishmentId";
             #endregion
-            ExecuteQuery(query, ConnectionString, new { establishmentAddressId });
+            ExecuteQuery(query, ConnectionString, new { establishmentId });
 
             return true;
         }

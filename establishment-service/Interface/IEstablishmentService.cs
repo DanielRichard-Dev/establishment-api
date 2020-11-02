@@ -21,7 +21,7 @@ namespace establishment_service.Interface
 
         bool SaveEstablishment(EstablishmentModel establishment);
 
-        bool RemoveEstablishment(EstablishmentModel establishment);
+        bool RemoveEstablishment(int establishmentId);
 
         int InsertEstablishment(EstablishmentModel establishment);
 

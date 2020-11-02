@@ -96,11 +96,11 @@ namespace establishment_service.Establishment
             return true;
         }
 
-        public bool RemoveEstablishment(EstablishmentModel establishment)
+        public bool RemoveEstablishment(int establishmentId)
         {
-            DeleteEstablishment(establishment.EstablishmentId);
-            DeleteEstablishmentAddress(establishment.Address.EstablishmentAddressId);
-            DeleteEstablishmentAccount(establishment.Account.EstablishmentAccountId);
+            DeleteEstablishment(establishmentId);
+            DeleteEstablishmentAddress(establishmentId);
+            DeleteEstablishmentAccount(establishmentId);
 
             return true;
         }
@@ -232,18 +232,18 @@ namespace establishment_service.Establishment
             return _establishmentRepository.DeleteEstablishment(establishmentId);
         }
 
-        public bool DeleteEstablishmentAddress(int establishmentAddressId)
+        public bool DeleteEstablishmentAddress(int establishmentId)
         {
-            if (establishmentAddressId != 0)
-                _establishmentAddressRepository.DeleteEstablishmentAddress(establishmentAddressId);
+            if (establishmentId != 0)
+                _establishmentAddressRepository.DeleteEstablishmentAddress(establishmentId);
 
             return true;
         }
 
-        public bool DeleteEstablishmentAccount(int establishmentAccountId)
+        public bool DeleteEstablishmentAccount(int establishmentId)
         {
-            if (establishmentAccountId != 0)
-                _establishmentAccountRepository.DeleteEstablishmentAccount(establishmentAccountId);
+            if (establishmentId != 0)
+                _establishmentAccountRepository.DeleteEstablishmentAccount(establishmentId);
 
             return true;
         }

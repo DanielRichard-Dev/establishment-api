@@ -58,28 +58,34 @@ window.company.functions = {
     getObject: (establishmentId) => {
         let cnpj = $('#cnpj').val().replaceAll('.', '').replace('/','').replace('-','');
         let telephone = $('#phone').val().replace('(', '').replace(')', '').replace('-', '');
+        let categoryId = parseInt($('#select-category').val());
 
-        let data = {
-            establishmentId: establishmentId,
-            CompanyName: $('#companynName').val(),
-            FantasyName: $('#fantasyName').val(),
-            CNPJ: cnpj,
-            Email: $('#Email').val(),
-            Telephone: telephone,
-            Status: $('#status').prop("checked"),
-            Address: {
-                Address: $('#address').val(),
-                City: $('#city').val(),
-                State: $('#state').val()
-            },
-            CategoryId: parseInt($('#select-category').val()),
-            Account: {
-                Agency: $('#agency').val(),
-                Account: $('#account').val()
-            }
-        };
-
-        return data;
+        if (telephone == '' && categoryId == 1){
+            window.functions.messageReturn('modal-alert', 'Categoria SUPERMERCADO é necessário informar telefone!', false);
+        } 
+        else {
+            let data = {
+                establishmentId: establishmentId,
+                CompanyName: $('#companynName').val(),
+                FantasyName: $('#fantasyName').val(),
+                CNPJ: cnpj,
+                Email: $('#Email').val(),
+                Telephone: telephone,
+                Status: $('#status').prop("checked"),
+                Address: {
+                    Address: $('#address').val(),
+                    City: $('#city').val(),
+                    State: $('#state').val()
+                },
+                CategoryId: categoryId,
+                Account: {
+                    Agency: $('#agency').val(),
+                    Account: $('#account').val()
+                }
+            };
+    
+            return data;
+        }
     },
     
     created: () => {      

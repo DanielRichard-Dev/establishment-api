@@ -61,7 +61,7 @@ namespace establishment_api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseCors(x => x.WithOrigins("https://danielrichard-dev.github.io/").AllowAnyHeader().AllowAnyMethod());
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             if (env.IsDevelopment())
             {
